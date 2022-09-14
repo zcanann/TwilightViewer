@@ -16,19 +16,23 @@ namespace WWActorEdit.Kazari.DZx
         uint _Parameters;
         Vector3 _Position;
         ushort _Unknown1;
-        double _RotationY;
+        ushort _RotationY;
         ushort _Unknown2;
         ushort _Unknown3;
         uint _Unknown4;
+
+        float _Size;
 
         public string Name { get { return _Name; } set { _Name = value; HasChanged = true; } }
         public uint Parameters { get { return _Parameters; } set { _Parameters = value; HasChanged = true; } }
         public Vector3 Position { get { return _Position; } set { _Position = value; HasChanged = true; } }
         public ushort Unknown1 { get { return _Unknown1; } set { _Unknown1 = value; HasChanged = true; } }
-        public double RotationY { get { return _RotationY; } set { _RotationY = value; HasChanged = true; } }
+        public ushort RotationY { get { return _RotationY; } set { _RotationY = value; HasChanged = true; } }
         public ushort Unknown2 { get { return _Unknown2; } set { _Unknown2 = value; HasChanged = true; } }
         public ushort Unknown3 { get { return _Unknown3; } set { _Unknown3 = value; HasChanged = true; } }
         public uint Unknown4 { get { return _Unknown4; } set { _Unknown4 = value; HasChanged = true; } }
+
+        public float Size { get { return _Size; } set { _Size = value; HasChanged = true; } }
 
         public RARC.FileEntry ParentFile { get; set; }
         public int Offset { get; set; }
@@ -62,13 +66,16 @@ namespace WWActorEdit.Kazari.DZx
                 Helpers.ConvertIEEE754Float(Helpers.Read32(SrcData, SrcOffset + 0x14)));
 
             _Unknown1 = Helpers.Read16(SrcData, SrcOffset + 0x18);
-            _RotationY = ((short)Helpers.Read16(SrcData, SrcOffset + 0x1A) / 182.04444444444444).Clamp(-180, 179);
+            _RotationY = Helpers.Read16(SrcData, SrcOffset + 0x1A);
             _Unknown2 = Helpers.Read16(SrcData, SrcOffset + 0x1C);
 
             _Unknown3 = Helpers.Read16(SrcData, SrcOffset + 0x1E);
             _Unknown4 = Helpers.Read32(SrcData, SrcOffset + 0x20);
 
+            _Size = Helpers.ConvertIEEE754Float(Helpers.Read32(SrcData, SrcOffset + 0x20));
+
             SrcOffset += 0x24;
+
 
             RenderColor = Color;
 
@@ -85,7 +92,10 @@ namespace WWActorEdit.Kazari.DZx
                 MatchedCollision = ParentZA.DZBs.Find(x => x.Name.StartsWith(_Name));
             }
 
-            Helpers.DrawFramedCube(new Vector3d(15, 15, 15));
+            //Helpers.DrawFramedCube(new Vector3d(15, 15, 15));
+            Helpers.DrawFramedCube(new Vector3d(1, 1, 1));
+
+
             GL.EndList();
         }
 
@@ -99,7 +109,7 @@ namespace WWActorEdit.Kazari.DZx
             Helpers.Overwrite32(ref Data, Offset + 0x10, BitConverter.ToUInt32(BitConverter.GetBytes(_Position.Y), 0));
             Helpers.Overwrite32(ref Data, Offset + 0x14, BitConverter.ToUInt32(BitConverter.GetBytes(_Position.Z), 0));
             Helpers.Overwrite16(ref Data, Offset + 0x18, _Unknown1);
-            Helpers.Overwrite16(ref Data, Offset + 0x1A, (ushort)(_RotationY * 182.04444444444444f));
+            Helpers.Overwrite16(ref Data, Offset + 0x1A, _RotationY);
             Helpers.Overwrite16(ref Data, Offset + 0x1C, _Unknown2);
             Helpers.Overwrite16(ref Data, Offset + 0x1E, _Unknown3);
             Helpers.Overwrite32(ref Data, Offset + 0x20, _Unknown4);
@@ -111,6 +121,57 @@ namespace WWActorEdit.Kazari.DZx
         {
             GL.PushMatrix();
             GL.Translate(_Position);
+
+            string size = _Unknown4.ToString("X8");
+            int width, length, height;
+            double widthScale, lenghtScale, heightScale;
+
+            int.TryParse(size.Substring(0, 2), System.Globalization.NumberStyles.HexNumber, null, out width);
+            int.TryParse(size.Substring(2, 2), System.Globalization.NumberStyles.HexNumber, null, out height);
+            int.TryParse(size.Substring(4, 2), System.Globalization.NumberStyles.HexNumber, null, out length);
+
+
+            /*
+            widthScale = Math.Sqrt(width);
+            lenghtScale = Math.Sqrt(length);
+            heightScale = Math.Sqrt(height);
+            */
+
+            if (_Name == "scnChg" || _Name == "noChgRM" || _Name == "CamArea" || _Name == "CamAreC" || _Name == "SwAreaS" || _Name == "SwAreaC" || _Name == "ClearB" || _Name == "Hjump" || _Name == "Hstop" || _Name == "TagEvC" || _Name == "EvtArea" || _Name == "hider" || _Name == "Stream" || _Name == "mirror") //Rectangle or Cuboid (Quader)
+            {
+                width = (width * 7);
+                height = (height * 7);
+                length = (length * 7);
+
+                widthScale = width;
+                heightScale = height;
+                lenghtScale = length;
+            }
+            else //Circle or Cylinder or Sphere (Kugel)
+            {
+                //width = (width * 7);
+                //height = (height * 7);
+                //length = (length * 7);
+
+                //widthScale = width;
+                //heightScale = height;
+                //lenghtScale = length;
+
+                widthScale = 15;
+                heightScale = 15;
+                lenghtScale = 15;
+            }
+
+            if (!Highlight)
+            {
+                GL.Scale(new Vector3d(15, 15, 15));
+            }
+            else
+            {
+                GL.Scale(new Vector3d(widthScale, heightScale, lenghtScale));
+            }
+
+
             GL.Rotate(_RotationY, 0, 1, 0);
             GL.Color4((Highlight ? System.Drawing.Color.Red : RenderColor));
             if (MatchedModel != null) MatchedModel.Render();

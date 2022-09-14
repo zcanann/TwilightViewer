@@ -90,7 +90,7 @@ namespace WWActorEdit.Kazari.DZx
                         /* Typically in DZR */
                         case "ACTR": Data[i] = new ACTR(FE, ref ReadOffset, NewNode, System.Drawing.Color.GreenYellow, ParentZA); continue;
                         case "TGOB": Data[i] = new ACTR(FE, ref ReadOffset, NewNode, System.Drawing.Color.GreenYellow, ParentZA); continue;
-                        case "PLYR": Data[i] = new ACTR(FE, ref ReadOffset, NewNode, System.Drawing.Color.Orange); continue;
+                        case "PLYR": Data[i] = new PLYR(FE, ref ReadOffset, NewNode, System.Drawing.Color.Orange); continue;
                         case "PPNT":    /* Found in DmSpot0's Stage DZS for some reason... */
                         case "RPPN": Data[i] = new RPPN(FE, ref ReadOffset, NewNode, System.Drawing.Color.LightSkyBlue); continue;
                         case "SHIP": Data[i] = new SHIP(FE, ref ReadOffset, NewNode, System.Drawing.Color.BlueViolet); continue;
@@ -98,6 +98,7 @@ namespace WWActorEdit.Kazari.DZx
                         case "DOOR":
                         case "Door": Data[i] = new TGDR(FE, ref ReadOffset, NewNode, System.Drawing.Color.HotPink, ParentZA); continue;
                         case "LGTV": Data[i] = new LGTV(FE, ref ReadOffset, NewNode, System.Drawing.Color.DarkGray); continue;  /* ????? */
+                        case "RPAT": Data[i] = new RPAT(FE, ref ReadOffset, NewNode, System.Drawing.Color.LightSkyBlue, ParentZA); continue;
 
                         /* Typically in DZS */
                         case "MULT": Data[i] = new MULT(FE, ref ReadOffset, NewNode, System.Drawing.Color.LightGray); continue;
@@ -108,7 +109,7 @@ namespace WWActorEdit.Kazari.DZx
                     switch (Tag.Substring(0, 3))
                     {
                         case "ACT": Data[i] = new ACTR(FE, ref ReadOffset, NewNode, System.Drawing.Color.GreenYellow, ParentZA); break;
-                        case "PLY": Data[i] = new ACTR(FE, ref ReadOffset, NewNode, System.Drawing.Color.Orange); break;
+                        case "PLY": Data[i] = new PLYR(FE, ref ReadOffset, NewNode, System.Drawing.Color.Orange); break;
                         case "SCO": Data[i] = new TGDR(FE, ref ReadOffset, NewNode, System.Drawing.Color.Yellow, ParentZA); break;
                         case "TRE": Data[i] = new TRES(FE, ref ReadOffset, NewNode, System.Drawing.Color.SaddleBrown); break;
                         default: Data[i] = new Generic(FE, ref ReadOffset, NewNode); NewNode.Tag = Data[i]; break;

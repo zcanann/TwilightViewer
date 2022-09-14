@@ -42,7 +42,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(65, 3);
-            this.textBox1.MaxLength = 7;
+            this.textBox1.MaxLength = 8;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(112, 20);
             this.textBox1.TabIndex = 2;
@@ -119,9 +119,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(3, 6);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 13);
+            this.label5.Size = new System.Drawing.Size(63, 13);
             this.label5.TabIndex = 13;
-            this.label5.Text = "Unknown:";
+            this.label5.Text = "Parameters:";
             // 
             // RPPNControl
             // 

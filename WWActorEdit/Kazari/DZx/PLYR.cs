@@ -10,20 +10,19 @@ using OpenTK.Graphics.OpenGL;
 
 namespace WWActorEdit.Kazari.DZx
 {
-    public class ACTR : IDZxChunkElement
+    public class PLYR : IDZxChunkElement
     {
         string _Name;
         uint _Parameters;
-        Vector3 _Position;
-        ushort _Flag1, _Flag2, _Flag3;
+        Vector3 _Position, _Rotation;
+        ushort _SpawnID;
         ushort _Unknown;
 
         public string Name { get { return _Name; } set { _Name = value; HasChanged = true; } }
         public uint Parameters { get { return _Parameters; } set { _Parameters = value; HasChanged = true; } }
         public Vector3 Position { get { return _Position; } set { _Position = value; HasChanged = true; } }
-        public ushort Flag1 { get { return _Flag1; } set { _Flag1 = value; HasChanged = true; } }
-        public ushort Flag2 { get { return _Flag2; } set { _Flag2 = value; HasChanged = true; } }
-        public ushort Flag3 { get { return _Flag3; } set { _Flag3 = value; HasChanged = true; } }
+        public Vector3 Rotation { get { return _Rotation; } set { _Rotation = value; HasChanged = true; } }
+        public ushort SpawnID { get { return _SpawnID; } set { _SpawnID = value; HasChanged = true; } }
         public ushort Unknown { get { return _Unknown; } set { _Unknown = value; HasChanged = true; } }
 
         public RARC.FileEntry ParentFile { get; set; }
@@ -42,7 +41,7 @@ namespace WWActorEdit.Kazari.DZx
         public J3Dx.J3Dx MatchedModel { get; set; }
         public DZB.DZB MatchedCollision { get; set; }
 
-        public ACTR(RARC.FileEntry FE, ref int SrcOffset, TreeNode ParentNode, System.Drawing.Color Color = default(System.Drawing.Color), ZeldaArc ParentZA = null)
+        public PLYR(RARC.FileEntry FE, ref int SrcOffset, TreeNode ParentNode, System.Drawing.Color Color = default(System.Drawing.Color), ZeldaArc ParentZA = null)
         {
             ParentFile = FE;
 
@@ -57,10 +56,13 @@ namespace WWActorEdit.Kazari.DZx
                 Helpers.ConvertIEEE754Float(Helpers.Read32(SrcData, SrcOffset + 0x10)),
                 Helpers.ConvertIEEE754Float(Helpers.Read32(SrcData, SrcOffset + 0x14)));
 
-            _Flag1 = Helpers.Read16(SrcData, SrcOffset + 0x18);
-            _Flag2 = Helpers.Read16(SrcData, SrcOffset + 0x1A);
-            _Flag3 = Helpers.Read16(SrcData, SrcOffset + 0x1C);
-            
+            _Rotation = new Vector3(
+            ((short)Helpers.Read16(SrcData, SrcOffset + 0x18) / 182.04444444444444f).Clamp(-180, 179),
+            ((short)Helpers.Read16(SrcData, SrcOffset + 0x1A) / 182.04444444444444f).Clamp(-180, 179),
+            0);
+
+            _SpawnID = Helpers.Read16(SrcData, SrcOffset + 0x1C);
+
             _Unknown = Helpers.Read16(SrcData, SrcOffset + 0x1E);
 
             SrcOffset += 0x20;
@@ -93,9 +95,9 @@ namespace WWActorEdit.Kazari.DZx
             Helpers.Overwrite32(ref Data, Offset + 0x0C, BitConverter.ToUInt32(BitConverter.GetBytes(_Position.X), 0));
             Helpers.Overwrite32(ref Data, Offset + 0x10, BitConverter.ToUInt32(BitConverter.GetBytes(_Position.Y), 0));
             Helpers.Overwrite32(ref Data, Offset + 0x14, BitConverter.ToUInt32(BitConverter.GetBytes(_Position.Z), 0));
-            Helpers.Overwrite16(ref Data, Offset + 0x18, _Flag1);
-            Helpers.Overwrite16(ref Data, Offset + 0x1A, _Flag2);
-            Helpers.Overwrite16(ref Data, Offset + 0x1C, _Flag3);
+            Helpers.Overwrite16(ref Data, Offset + 0x18, (ushort)(_Rotation.X * 182.04444444444444f));
+            Helpers.Overwrite16(ref Data, Offset + 0x1A, (ushort)(_Rotation.Y * 182.04444444444444f));
+            Helpers.Overwrite16(ref Data, Offset + 0x1C, _SpawnID);
             Helpers.Overwrite16(ref Data, Offset + 0x1E, _Unknown);
 
             ParentFile.SetFileData(Data);
@@ -105,9 +107,9 @@ namespace WWActorEdit.Kazari.DZx
         {
             GL.PushMatrix();
             GL.Translate(_Position);
-            GL.Rotate(0, 0, 0, 1);
-            GL.Rotate(0, 0, 1, 0);
-            GL.Rotate(0, 1, 0, 0);
+            GL.Rotate(_Rotation.Z, 0, 0, 1);
+            GL.Rotate(_Rotation.Y, 0, 1, 0);
+            GL.Rotate(_Rotation.X, 1, 0, 0);
             GL.Color4((Highlight ? System.Drawing.Color.Red : RenderColor));
             if (MatchedModel != null) MatchedModel.Render();
             if (MatchedCollision != null) MatchedCollision.Render();
@@ -121,7 +123,7 @@ namespace WWActorEdit.Kazari.DZx
         {
             Parent.FindForm().SuspendLayout();
 
-            EditControl = new ACTRControl(this);
+            EditControl = new PLYRControl(this);
             EditControl.Parent = Parent;
 
             Parent.ClientSize = EditControl.Size;

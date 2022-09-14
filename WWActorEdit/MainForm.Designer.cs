@@ -60,17 +60,17 @@
             this.exitEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showReadmeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.floatConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.floatConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -263,7 +263,7 @@
             this.toolStripSeparator3,
             this.exitEditorToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // stageToolStripMenuItem
@@ -343,6 +343,13 @@
             this.showReadmeToolStripMenuItem.Text = "&Show Readme";
             this.showReadmeToolStripMenuItem.Click += new System.EventHandler(this.showReadmeToolStripMenuItem_Click);
             // 
+            // wikiToolStripMenuItem
+            // 
+            this.wikiToolStripMenuItem.Name = "wikiToolStripMenuItem";
+            this.wikiToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.wikiToolStripMenuItem.Text = "&Wiki";
+            this.wikiToolStripMenuItem.Click += new System.EventHandler(this.wikiToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
@@ -355,12 +362,17 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // wikiToolStripMenuItem
+            // toolStripSeparator4
             // 
-            this.wikiToolStripMenuItem.Name = "wikiToolStripMenuItem";
-            this.wikiToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.wikiToolStripMenuItem.Text = "&Wiki";
-            this.wikiToolStripMenuItem.Click += new System.EventHandler(this.wikiToolStripMenuItem_Click);
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(152, 6);
+            // 
+            // floatConverterToolStripMenuItem
+            // 
+            this.floatConverterToolStripMenuItem.Name = "floatConverterToolStripMenuItem";
+            this.floatConverterToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.floatConverterToolStripMenuItem.Text = "Float Converter";
+            this.floatConverterToolStripMenuItem.Click += new System.EventHandler(this.floatConverterToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -415,18 +427,6 @@
             this.panel2.Size = new System.Drawing.Size(770, 43);
             this.panel2.TabIndex = 6;
             this.panel2.Visible = false;
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(152, 6);
-            // 
-            // floatConverterToolStripMenuItem
-            // 
-            this.floatConverterToolStripMenuItem.Name = "floatConverterToolStripMenuItem";
-            this.floatConverterToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.floatConverterToolStripMenuItem.Text = "Float Converter";
-            this.floatConverterToolStripMenuItem.Click += new System.EventHandler(this.floatConverterToolStripMenuItem_Click);
             // 
             // MainForm
             // 

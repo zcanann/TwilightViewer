@@ -456,6 +456,8 @@ namespace WWActorEdit
                     Vector3 CamPos = Vector3.Zero;
                     if (SelectedDZRChunkElement is ACTR)
                         CamPos = (-((ACTR)SelectedDZRChunkElement).Position * 0.005f);
+                    else if (SelectedDZRChunkElement is PLYR)
+                        CamPos = (-((PLYR)SelectedDZRChunkElement).Position * 0.005f);
                     else if (SelectedDZRChunkElement is RPPN)
                         CamPos = (-((RPPN)SelectedDZRChunkElement).Position * 0.005f);
                     else if (SelectedDZRChunkElement is SHIP)

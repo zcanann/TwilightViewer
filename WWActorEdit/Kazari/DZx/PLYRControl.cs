@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace WWActorEdit.Kazari.DZx
 {
-    public partial class ACTRControl : UserControl
+    public partial class PLYRControl : UserControl
     {
-        ACTR Actor;
+        PLYR Actor;
 
-        public ACTRControl(ACTR ThisActor)
+        public PLYRControl(PLYR ThisActor)
         {
             InitializeComponent();
 
@@ -33,9 +33,9 @@ namespace WWActorEdit.Kazari.DZx
             numericUpDown1.Value = (decimal)Actor.Position.X;
             numericUpDown2.Value = (decimal)Actor.Position.Y;
             numericUpDown3.Value = (decimal)Actor.Position.Z;
-            textBox_flag1.Text = Actor.Flag1.ToString("X4");
-            textBox_flag2.Text = Actor.Flag2.ToString("X4");
-            textBox_flag3.Text = Actor.Flag3.ToString("X4");
+            numericUpDown4.Value = (decimal)Actor.Rotation.X;
+            numericUpDown5.Value = (decimal)Actor.Rotation.Y;
+            textBox4.Text = Actor.SpawnID.ToString("X4");
             textBox3.Text = Actor.Unknown.ToString("X4");
 
             AttachDetachEvents(true);
@@ -50,9 +50,9 @@ namespace WWActorEdit.Kazari.DZx
                 numericUpDown1.ValueChanged += new EventHandler(numericUpDown1_ValueChanged);
                 numericUpDown2.ValueChanged += new EventHandler(numericUpDown2_ValueChanged);
                 numericUpDown3.ValueChanged += new EventHandler(numericUpDown3_ValueChanged);
-                textBox_flag1.TextChanged += new EventHandler(numericUpDown4_ValueChanged);
-                textBox_flag2.TextChanged += new EventHandler(numericUpDown5_ValueChanged);
-                textBox_flag3.TextChanged += new EventHandler(numericUpDown6_ValueChanged);
+                numericUpDown4.ValueChanged += new EventHandler(numericUpDown4_ValueChanged);
+                numericUpDown5.ValueChanged += new EventHandler(numericUpDown5_ValueChanged);
+                textBox4.TextChanged += new EventHandler(textBox4_TextChanged);
                 textBox3.TextChanged += new EventHandler(textBox3_TextChanged);
             }
             else
@@ -62,9 +62,9 @@ namespace WWActorEdit.Kazari.DZx
                 numericUpDown1.ValueChanged -= new EventHandler(numericUpDown1_ValueChanged);
                 numericUpDown2.ValueChanged -= new EventHandler(numericUpDown2_ValueChanged);
                 numericUpDown3.ValueChanged -= new EventHandler(numericUpDown3_ValueChanged);
-                textBox_flag1.TextChanged -= new EventHandler(numericUpDown4_ValueChanged);
-                textBox_flag2.TextChanged -= new EventHandler(numericUpDown5_ValueChanged);
-                textBox_flag3.TextChanged -= new EventHandler(numericUpDown6_ValueChanged);
+                numericUpDown4.ValueChanged -= new EventHandler(numericUpDown4_ValueChanged);
+                numericUpDown5.ValueChanged -= new EventHandler(numericUpDown5_ValueChanged);
+                textBox4.TextChanged -= new EventHandler(textBox4_TextChanged);
                 textBox3.TextChanged -= new EventHandler(textBox3_TextChanged);
             }
         }
@@ -97,20 +97,12 @@ namespace WWActorEdit.Kazari.DZx
 
         private void numericUpDown4_ValueChanged(object sender, EventArgs e)
         {
-            if (textBox_flag1.TextLength == textBox_flag1.MaxLength)
-                Actor.Flag1 = ushort.Parse(textBox_flag1.Text, System.Globalization.NumberStyles.HexNumber);
+            Actor.Rotation = new OpenTK.Vector3((float)numericUpDown4.Value, Actor.Rotation.Y, Actor.Rotation.Z);
         }
 
         private void numericUpDown5_ValueChanged(object sender, EventArgs e)
         {
-            if (textBox_flag2.TextLength == textBox_flag2.MaxLength)
-                Actor.Flag2 = ushort.Parse(textBox_flag2.Text, System.Globalization.NumberStyles.HexNumber);
-        }
-
-        private void numericUpDown6_ValueChanged(object sender, EventArgs e)
-        {
-            if (textBox_flag2.TextLength == textBox_flag2.MaxLength)
-                Actor.Flag2 = ushort.Parse(textBox_flag2.Text, System.Globalization.NumberStyles.HexNumber);
+            Actor.Rotation = new OpenTK.Vector3(Actor.Rotation.X, (float)numericUpDown5.Value, Actor.Rotation.Z);
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -119,9 +111,10 @@ namespace WWActorEdit.Kazari.DZx
                 Actor.Unknown = ushort.Parse(textBox3.Text, System.Globalization.NumberStyles.HexNumber);
         }
 
-        private void ACTRControl_Load(object sender, EventArgs e)
+        private void textBox4_TextChanged(object sender, EventArgs e)
         {
-
+            if (textBox4.TextLength == textBox4.MaxLength)
+                Actor.SpawnID = ushort.Parse(textBox4.Text, System.Globalization.NumberStyles.HexNumber);
         }
     }
 }

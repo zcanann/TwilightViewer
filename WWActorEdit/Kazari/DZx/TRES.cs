@@ -48,14 +48,26 @@ namespace WWActorEdit.Kazari.DZx
 
             Offset = SrcOffset;
 
-            _Name = Helpers.ReadString(SrcData, SrcOffset, 8);
-            _ChestType = Helpers.Read16(SrcData, SrcOffset + 0x09);
-            _Position = new Vector3(
-                Helpers.ConvertIEEE754Float(Helpers.Read32(SrcData, SrcOffset + 0x0C)),
-                Helpers.ConvertIEEE754Float(Helpers.Read32(SrcData, SrcOffset + 0x10)),
-                Helpers.ConvertIEEE754Float(Helpers.Read32(SrcData, SrcOffset + 0x14)));
-            _Rotation = ((short)(Helpers.Read16(SrcData, SrcOffset + 0x1A)) / 182.04444444444444f).Clamp(-180, 179);
-            _Contents = Helpers.Read8(SrcData, SrcOffset + 0x1C);
+            try
+            {
+                _Name = Helpers.ReadString(SrcData, SrcOffset, 8);
+                _ChestType = Helpers.Read16(SrcData, SrcOffset + 0x09);
+                _Position = new Vector3(
+                    Helpers.ConvertIEEE754Float(Helpers.Read32(SrcData, SrcOffset + 0x0C)),
+                    Helpers.ConvertIEEE754Float(Helpers.Read32(SrcData, SrcOffset + 0x10)),
+                    Helpers.ConvertIEEE754Float(Helpers.Read32(SrcData, SrcOffset + 0x14)));
+                _Rotation = ((short)(Helpers.Read16(SrcData, SrcOffset + 0x1A)) / 182.04444444444444f).Clamp(-180, 179);
+                _Contents = Helpers.Read8(SrcData, SrcOffset + 0x1C);
+            }
+            catch (Exception ex)
+            {
+                _Name = "xd";
+                _ChestType = 0;
+                _Position = new Vector3(0, 0, 0);
+                _Rotation = 0;
+                _Contents = 0;
+            }
+
 
             SrcOffset += 0x20;
 

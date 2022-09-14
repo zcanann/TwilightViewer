@@ -1,6 +1,6 @@
 ﻿namespace WWActorEdit.Kazari.DZx
 {
-    partial class ACTRControl
+    partial class PLYRControl
     {
         /// <summary> 
         /// Erforderliche Designervariable.
@@ -36,15 +36,18 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox_flag1 = new System.Windows.Forms.TextBox();
-            this.textBox_flag2 = new System.Windows.Forms.TextBox();
-            this.textBox_flag3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -150,6 +153,44 @@
             this.numericUpDown3.TabIndex = 7;
             this.numericUpDown3.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
             // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.DecimalPlaces = 2;
+            this.numericUpDown4.Location = new System.Drawing.Point(72, 133);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            179,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Minimum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(105, 20);
+            this.numericUpDown4.TabIndex = 9;
+            this.numericUpDown4.ValueChanged += new System.EventHandler(this.numericUpDown4_ValueChanged);
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.DecimalPlaces = 2;
+            this.numericUpDown5.Location = new System.Drawing.Point(72, 159);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            179,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Minimum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(105, 20);
+            this.numericUpDown5.TabIndex = 10;
+            this.numericUpDown5.ValueChanged += new System.EventHandler(this.numericUpDown5_ValueChanged);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -178,42 +219,34 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "Unknown:";
             // 
-            // textBox_flag1
+            // textBox4
             // 
-            this.textBox_flag1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox_flag1.Location = new System.Drawing.Point(72, 135);
-            this.textBox_flag1.MaxLength = 4;
-            this.textBox_flag1.Name = "textBox_flag1";
-            this.textBox_flag1.Size = new System.Drawing.Size(105, 20);
-            this.textBox_flag1.TabIndex = 14;
+            this.textBox4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox4.Location = new System.Drawing.Point(72, 185);
+            this.textBox4.MaxLength = 4;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(105, 20);
+            this.textBox4.TabIndex = 14;
             // 
-            // textBox_flag2
+            // label6
             // 
-            this.textBox_flag2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox_flag2.Location = new System.Drawing.Point(72, 161);
-            this.textBox_flag2.MaxLength = 4;
-            this.textBox_flag2.Name = "textBox_flag2";
-            this.textBox_flag2.Size = new System.Drawing.Size(105, 20);
-            this.textBox_flag2.TabIndex = 15;
-            // 
-            // textBox_flag3
-            // 
-            this.textBox_flag3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox_flag3.Location = new System.Drawing.Point(72, 187);
-            this.textBox_flag3.MaxLength = 4;
-            this.textBox_flag3.Name = "textBox_flag3";
-            this.textBox_flag3.Size = new System.Drawing.Size(105, 20);
-            this.textBox_flag3.TabIndex = 16;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 189);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Spawn ID:";
             // 
             // ACTRControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox_flag3);
-            this.Controls.Add(this.textBox_flag2);
-            this.Controls.Add(this.textBox_flag1);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.numericUpDown4);
+            this.Controls.Add(this.numericUpDown5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.numericUpDown3);
             this.Controls.Add(this.numericUpDown2);
@@ -226,10 +259,11 @@
             this.DoubleBuffered = true;
             this.Name = "ACTRControl";
             this.Size = new System.Drawing.Size(180, 234);
-            this.Load += new System.EventHandler(this.ACTRControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,11 +279,12 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox_flag1;
-        private System.Windows.Forms.TextBox textBox_flag2;
-        private System.Windows.Forms.TextBox textBox_flag3;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label6;
     }
 }

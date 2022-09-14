@@ -34,7 +34,7 @@ namespace WWActorEdit.Kazari.DZx
             numericUpDown2.Value = (decimal)Door.Position.Y;
             numericUpDown3.Value = (decimal)Door.Position.Z;
             textBox3.Text = Door.Unknown1.ToString("X4");
-            numericUpDown4.Value = (decimal)Door.RotationY;
+            textBox_rotY.Text = Door.RotationY.ToString("X4");
             textBox4.Text = Door.Unknown2.ToString("X4");
             textBox5.Text = Door.Unknown3.ToString("X4");
             textBox6.Text = Door.Unknown4.ToString("X8");
@@ -52,7 +52,7 @@ namespace WWActorEdit.Kazari.DZx
                 numericUpDown2.ValueChanged += new EventHandler(numericUpDown2_ValueChanged);
                 numericUpDown3.ValueChanged += new EventHandler(numericUpDown3_ValueChanged);
                 textBox3.TextChanged += new EventHandler(textBox3_TextChanged);
-                numericUpDown4.ValueChanged += new EventHandler(numericUpDown4_ValueChanged);
+                textBox_rotY.TextChanged += new EventHandler(numericUpDown4_ValueChanged);
                 textBox4.TextChanged += new EventHandler(textBox4_TextChanged);
                 textBox5.TextChanged += new EventHandler(textBox5_TextChanged);
                 textBox6.TextChanged += new EventHandler(textBox6_TextChanged);
@@ -65,7 +65,7 @@ namespace WWActorEdit.Kazari.DZx
                 numericUpDown2.ValueChanged -= new EventHandler(numericUpDown2_ValueChanged);
                 numericUpDown3.ValueChanged -= new EventHandler(numericUpDown3_ValueChanged);
                 textBox3.TextChanged -= new EventHandler(textBox3_TextChanged);
-                numericUpDown4.ValueChanged -= new EventHandler(numericUpDown4_ValueChanged);
+                textBox_rotY.TextChanged -= new EventHandler(numericUpDown4_ValueChanged);
                 textBox4.TextChanged -= new EventHandler(textBox4_TextChanged);
                 textBox5.TextChanged -= new EventHandler(textBox5_TextChanged);
                 textBox6.TextChanged -= new EventHandler(textBox6_TextChanged);
@@ -106,7 +106,8 @@ namespace WWActorEdit.Kazari.DZx
 
         private void numericUpDown4_ValueChanged(object sender, EventArgs e)
         {
-            Door.RotationY = (double)numericUpDown4.Value;
+            if (textBox_rotY.TextLength == textBox_rotY.MaxLength)
+                Door.RotationY = ushort.Parse(textBox_rotY.Text, System.Globalization.NumberStyles.HexNumber);
         }
 
         void textBox4_TextChanged(object sender, EventArgs e)

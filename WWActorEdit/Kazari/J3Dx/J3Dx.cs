@@ -1331,12 +1331,21 @@ namespace WWActorEdit.Kazari.J3Dx
         {
             if (Scene == null) return;      /* Nothing to render... */
 
-            GL.PushAttrib(AttribMask.AllAttribBits);
-            GL.Enable(EnableCap.PolygonOffsetFill);
-            GL.PolygonOffset(5.0f, 5.0f);
-            GL.CallList(SceneGLID);
-            GL.Disable(EnableCap.PolygonOffsetFill);
-            GL.PopAttrib();
+            try
+            {
+                GL.PushAttrib(AttribMask.AllAttribBits);
+                GL.Enable(EnableCap.PolygonOffsetFill);
+
+                GL.PolygonOffset(5.0f, 5.0f);
+
+                if(GL.IsList(SceneGLID) == true)
+                    GL.CallList(SceneGLID);
+
+                GL.Disable(EnableCap.PolygonOffsetFill);
+                GL.PopAttrib();
+            }
+            catch (System.AccessViolationException ex)
+            { }
         }
 
         #endregion
